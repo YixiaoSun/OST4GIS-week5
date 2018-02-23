@@ -21,3 +21,11 @@ body {
     overflow-y: auto;
     padding: 20px;
 }
+
+label{
+  font-family:Verdana;
+  font-weight:bold;
+  display:inline;
+  vertical-align:middle;
+  font-size:10pt;
+}

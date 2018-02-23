@@ -170,6 +170,125 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // This is a popular pattern that you'll run into in programs that run jQuery. It says not to run
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
+
+// Prepare the data
+/*var dataDownload=$.ajax('http://raw.githubusercontent.com/CPLN-692-401/datasets/master/json/philadelphia-crime-snippet.json');
+var parseData=function(data){return JSON.parse(data);};
+var getAndParseData=function(){
+dataDownload.done(function(data){
+    var parsed=parseData(data);
+    console.log(parsed);
+  });
+};
+getAndParseData();*/
+
+// Tasks
 $(document).ready(function() {
-  // Do your stuff here
+  // Task1
+  $("#main-heading").text('FIND YOUR PLACE');
+  $("#text-label1").text('Name');
+  //$("#text-input1").text('type in a neighborhood');
+  $("#text-label2").text('Neighborhood');
+  //$("#text-input2").text('type in a block');
+  $("#text-label3").text('Address');
+  //$("#text-input3").text('type in an address');
+  $("#number-label1").text('Latitude');
+  $("#number-label2").text('Longtitude');
+  //$("#numeric-input").text('type in a number');
+  $("#checkbox-label").text('Like');
+  //$("#cbox-input1").text('YES');
+  //$("#cbox-input2").text('YES');
+  $("#color-label").text('Display Color');
+  $("#button").text('Plot data');
+
+  // Task2
+  $("#text-input1").val('Meyerson Hall');
+  $("#text-input2").val('University City');
+  $("#text-input3").val('34 Walnut');
+  $("#numeric-input1").val('39.952578');
+  $("#numeric-input2").val('-75.194450');
+  $("#cbox-input").val('');
+  $("#color-input").val('');
+
+// [L.circleMarker([39.9522, -75.1639])],
+  //Task3
+  // Set up markers
+  var place = {
+    "markers": undefined,
+    "stringField1":undefined,
+    "stringField2":undefined,
+    "stringField3":undefined,
+    "numericField1":undefined,
+    "numericField2":undefined,
+    "booleanField":undefined,
+    "colorField":undefined
+  }; //items inside of the array
+
+  /*var removeMarkers= function (){
+    myMarker=L.circleMarker([place.numericField1,place.numericField2]);
+    map.removeLayer(L.circleMarker([place.numericField1,place.numericField2]));
+    console.log(myMarker);
+    console.log(place.numericField1,place.numericField2);
+  };
+
+  removeMarkers();*/
+
+  //Task 4
+  $("#text-input1").prop('disabled', false);
+  $("#text-input2").prop('disabled', false);
+  $("#text-input3").prop('disabled', false);
+  $("#numeric-input1").prop('disabled', false);
+  $("#numeric-input2").prop('disabled', false);
+  $("#cbox-input").prop('disabled', false);
+  $("#color-input").prop('disabled', false);
+
+  //Task 5 & Task 6
+
+  var likeJudgement=function (statement){
+    if(statement){
+      return ('Like');
+    }
+    else{
+      return ('Dislike');
+    }
+  };
+
+
+  $('button#button').click(function(e){
+
+    place.stringField1=$('#text-input1').val();
+    console.log("stringField1",place.stringField1);
+
+    place.stringField2=$('#text-input2').val();
+    console.log("stringField2",place.stringField2);
+
+    place.stringField3=$('#text-input3').val();
+    console.log("stringField3",place.stringField3);
+
+    place.numericField1=$('#numeric-input1').val();
+    console.log("numericField1",place.numericField1);
+
+    place.numericField2=$('#numeric-input2').val();
+    console.log("numericField2",place.numericField2);
+
+    place.booleanField =$('#cbox-input').prop("checked",true);
+    console.log("booleanField", likeJudgement(place.booleanField));
+
+    place.colorField=$('#color-input').val();
+    console.log("colorField",place.colorField);
+
+    var style = {
+      radius:10,
+      fillColor:place.colorField,
+      fillOpacity:0.4
+    };
+
+    var plotData = function(){
+      L.circleMarker([place.numericField1,place.numericField2],style)
+          .bindPopup('Name: '+place.stringField1+' Neighborhood: '+place.stringField2+' Address: '+place.stringField3+' '+likeJudgement(place.booleanField))
+          .addTo(map);
+    };
+
+    plotData();
+  });
 });
